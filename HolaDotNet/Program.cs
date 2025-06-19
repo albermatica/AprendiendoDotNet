@@ -1,2 +1,2 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("¡Hola, Alberto! ¡Estoy aprendiendo .NET!");
+Console.WriteLine("¡Hola, Crack! ¡Estoy aprendiendo .NET!");
