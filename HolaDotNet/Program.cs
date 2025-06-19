@@ -1,30 +1,19 @@
-﻿string usuarioRegistrado = "admin";
-string contraseñaRegistrada = "password";
-Console.Write("Ingrese su usuario: ");
-string usuarioIngresado = Console.ReadLine();
-Console.Write("Ingrese su contraseña: ");
-string contraseñaIngresada = Console.ReadLine();
+﻿using HolaDotNet;
 
-if(usuarioIngresado == usuarioRegistrado && contraseñaIngresada == contraseñaRegistrada)
-{
-    Console.WriteLine("¡Acceso concedido! Bienvenido.");
-}
-else
-{
-    Console.WriteLine("¡Acceso incorrecto! Acceso denegado.");
-}
+Producto miPrimerProducto = new Producto();
+miPrimerProducto.Id = 1;
+miPrimerProducto.Nombre = "Laptop Gamer";
+miPrimerProducto.Precio = 1200.00;
+miPrimerProducto.Stock = 5;
 
-Console.Write("Ingrese su edad: ");
-int edad = int.Parse(Console.ReadLine());
+Producto MiSegundoProducto = new Producto();
+MiSegundoProducto.Id = 2;
+MiSegundoProducto.Nombre = "Monitor Ultrawide";
+MiSegundoProducto.Precio = 3600.00;
+MiSegundoProducto.Stock = 3;
 
-if(edad >= 18)
-{
-    Console.WriteLine("Puedes acceder a contenido para adultos.");
-}
-else
-{
-    Console.WriteLine("Acceso restringido a contenido para adultos.");
-}
+Console.WriteLine("Producto: " + miPrimerProducto.Nombre);
+Console.WriteLine("Precio: " + miPrimerProducto.Precio);
 
 Console.WriteLine("\nPresiona cualquier tecla para salir...");
 Console.ReadKey();
