@@ -1,8 +1,8 @@
 ﻿string usuarioRegistrado = "admin";
-string contraseñaRegistrada = "passwrod";
+string contraseñaRegistrada = "password";
 Console.Write("Ingrese su usuario: ");
 string usuarioIngresado = Console.ReadLine();
-Console.Write("Ingrese su usuario: ");
+Console.Write("Ingrese su contraseña: ");
 string contraseñaIngresada = Console.ReadLine();
 
 if(usuarioIngresado == usuarioRegistrado && contraseñaIngresada == contraseñaRegistrada)
