@@ -1,7 +1,7 @@
 ﻿string nombre = "Alberto";
 int edad = 34;
 double salarioMensual = 34000;
-bool esEmnpleado = true;
+bool esEmpleado = true;
 
 // Calculamos salario anual
 double salarioAnual = salarioMensual * 12;
@@ -20,7 +20,7 @@ bool esMayorDeEdad = (edad >= 18);
 
 //Calculo si puede solicitar credito
 
-bool puedeSolicitarCredito = (esEmnpleado && salarioMensual>=1500);
+bool puedeSolicitarCredito = (esEmpleado && salarioMensual>=1500);
 
 //Calcular si necesita aumento
 
