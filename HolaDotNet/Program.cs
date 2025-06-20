@@ -1,22 +1,10 @@
 ﻿using HolaDotNet;
 
-Producto miPrimerProducto = new Producto();
-miPrimerProducto.Id = 1;
-miPrimerProducto.Nombre = "Laptop Gamer";
-miPrimerProducto.Precio = 1200.00;
-miPrimerProducto.Stock = 5;
+Producto miPrimerProducto = new Producto(1, "Laptop Gamer", 1200.00, 5);
+Producto miSegundoProducto = new Producto(2, "Monitor Ultrawide", 360.00, 3);
 
-Producto miSegundoProducto = new Producto();
-miSegundoProducto.Id = 2;
-miSegundoProducto.Nombre = "Monitor Ultrawide";
-miSegundoProducto.Precio = 3600.00;
-miSegundoProducto.Stock = 3;
-
-Console.WriteLine("Producto: " + miPrimerProducto.Nombre);
-Console.WriteLine("Precio: " + miPrimerProducto.Precio);
-
-Console.WriteLine("Producto 2: " + miSegundoProducto.Nombre);
-Console.WriteLine("Precio 2: " + miSegundoProducto.Precio);
+Console.WriteLine($"Producto 1: {miPrimerProducto.Nombre}, Precio: {miPrimerProducto.Precio}, Stock: {miPrimerProducto.Stock}");
+Console.WriteLine($"Producto 2: {miSegundoProducto.Nombre}, Precio: {miSegundoProducto.Precio}, Stock: {miSegundoProducto.Stock}");
 
 Console.WriteLine("\nPresiona cualquier tecla para salir...");
 Console.ReadKey();
