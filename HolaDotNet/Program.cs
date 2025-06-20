@@ -1,64 +1,66 @@
-﻿double numero1 = 0; // Inicializar para asegurar que tienen un valor por defecto
-double numero2 = 0;
-double resultadoDivision;
+﻿using System;
+using System.Collections.Generic; // Necesario para List<T>
+using System.Text.Json;           // Necesario para JsonSerializer
+using HolaDotNet;                 // Para poder usar tu clase Producto
 
-bool esNumero1Valido = false; // Usamos banderas separadas para cada número
-do
+namespace HolaDotNet // Asegúrate de que tu Program.cs esté dentro de este namespace
 {
-    Console.Write("Escribe el primer número: ");
-    try
+    internal class Program
     {
-        numero1 = double.Parse(Console.ReadLine()); // <-- ¡CORREGIDO: double.Parse!
-        esNumero1Valido = true;
-    }
-    catch (FormatException)
-    {
-        Console.WriteLine("Error: Por favor, ingrese un NÚMERO válido."); // <-- typo corregido
-    }
-    catch (Exception ex) // Para capturar cualquier otro error inesperado en la entrada
-    {
-        Console.WriteLine($"Ocurrió un error inesperado al leer el primer número: {ex.Message}");
-    }
-} while (!esNumero1Valido);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("--- Lección 2.5: Serialización y Deserialización JSON ---");
 
-bool esNumero2Valido = false; // Reiniciamos la bandera para el segundo bucle
-do
-{
-    Console.Write("Escribe el segundo número: ");
-    try
-    {
-        numero2 = double.Parse(Console.ReadLine()); // <-- ¡CORREGIDO: double.Parse!
-        esNumero2Valido = true;
-    }
-    catch (FormatException)
-    {
-        Console.WriteLine("Error: Por favor, ingrese un NÚMERO válido.");
-    }
-    catch (Exception ex) // Para capturar cualquier otro error inesperado en la entrada
-    {
-        Console.WriteLine($"Ocurrió un error inesperado al leer el segundo número: {ex.Message}");
-    }
-} while (!esNumero2Valido);
+            // --- 1. Crear un Producto y Serializarlo a JSON ---
+            Console.WriteLine("\n--- Serializando un Producto a JSON ---");
+            Producto miProductoOriginal = new Producto(101, "Smartphone Pro", 899.99, 15);
 
-// --- BLOQUE DE DIVISIÓN CON SU PROPIO TRY-CATCH ---
-try
-{
-    // Aquí es donde puede ocurrir la DivideByZeroException
-    resultadoDivision = numero1 / numero2;
-    Console.WriteLine($"El resultado de la división es: {resultadoDivision}");
-}
-catch (DivideByZeroException) // Capturamos la excepción específica de división por cero
-{
-    Console.WriteLine("Error: No se puede dividir por cero. Por favor, ingrese un segundo número diferente de cero.");
-}
-catch (Exception ex) // Capturamos cualquier otro error inesperado durante la división
-{
-    Console.WriteLine($"Ocurrió un error inesperado durante la división: {ex.Message}");
-}
-finally
-{
-    Console.WriteLine("Operación de división finalizada."); // Se ejecuta siempre
-}
+            // JsonSerializer.Serialize convierte el objeto C# en una cadena JSON
+            // El segundo argumento 'new JsonSerializerOptions { WriteIndented = true }'
+            // es opcional, pero hace que el JSON sea más legible (con indentación).
+            string jsonDeProducto = JsonSerializer.Serialize(miProductoOriginal, new JsonSerializerOptions { WriteIndented = true });
 
-Console.WriteLine("\nPresiona cualquier tecla para salir...");
-Console.ReadKey();
+            Console.WriteLine("Objeto C# 'miProductoOriginal' serializado a JSON:");
+            Console.WriteLine(jsonDeProducto);
+
+            // --- 2. Crear una Cadena JSON y Deserializarla a un Producto ---
+            Console.WriteLine("\n--- Deserializando JSON a un Objeto Producto ---");
+
+            // Esta es la cadena JSON que vamos a deserializar.
+            // Nota las comillas dobles escapadas \" para las propiedades del JSON.
+            string jsonRecibido = "{\"Id\":202,\"Nombre\":\"Smartwatch X\",\"Precio\":249.50,\"Stock\":30}";
+
+            Console.WriteLine("Cadena JSON a deserializar:");
+            Console.WriteLine(jsonRecibido);
+
+            // JsonSerializer.Deserialize<Producto> convierte la cadena JSON en un objeto C# de tipo Producto
+            Producto productoDeserializado = JsonSerializer.Deserialize<Producto>(jsonRecibido);
+
+            Console.WriteLine("\nObjeto 'productoDeserializado' (desde JSON) verificado:");
+            Console.WriteLine($"ID: {productoDeserializado.Id}");
+            Console.WriteLine($"Nombre: {productoDeserializado.Nombre}");
+            Console.WriteLine($"Precio: {productoDeserializado.Precio:C}"); // Usando formato de moneda
+            Console.WriteLine($"Stock: {productoDeserializado.Stock}");
+
+
+            // --- 3. BONUS: Serializar una List<Producto> ---
+            Console.WriteLine("\n--- Serializando una Lista de Productos a JSON ---");
+
+            List<Producto> listaDeProductos = new List<Producto>
+            {
+                new Producto(301, "Teclado Mecánico", 120.00, 25),
+                new Producto(302, "Ratón Ergonómico", 45.00, 40),
+                new Producto(303, "Webcam HD", 70.00, 18)
+            };
+
+            // Serializar la lista completa a JSON
+            string jsonDeListaDeProductos = JsonSerializer.Serialize(listaDeProductos, new JsonSerializerOptions { WriteIndented = true });
+
+            Console.WriteLine("Lista de objetos C# 'listaDeProductos' serializada a JSON:");
+            Console.WriteLine(jsonDeListaDeProductos);
+
+            Console.WriteLine("\nPresiona cualquier tecla para salir...");
+            Console.ReadKey();
+        }
+    }
+}
